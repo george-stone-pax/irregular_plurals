@@ -90,40 +90,6 @@
 </head>
 <body>
 
-    <!-- Скрипт защиты с исключением для localhost и редакторов -->
-    <script>
-        (function() {
-            try {
-                const allowedDomains = ['stepik.org', 'welcome.stepik.org'];
-                const hostname = window.location.hostname;
-                const protocol = window.location.protocol;
-                const referrer = document.referrer || "";
-
-                // Проверка на локальное окружение или среду разработки/редактора
-                const isLocal = protocol === 'file:' || 
-                                protocol === 'blob:' || 
-                                protocol === 'about:' || 
-                                hostname === 'localhost' || 
-                                hostname === '127.0.0.1' || 
-                                hostname === '' ||
-                                hostname.includes('googleusercontent.com'); 
-
-                const isInsideStepik = allowedDomains.some(domain => referrer.includes(domain)) || allowedDomains.includes(hostname);
-
-                if (!isLocal && !isInsideStepik) {
-                    document.body.innerHTML = `
-                        <div style="background:#000; color:#fff; height:100vh; display:flex;
-                                    flex-direction:column; align-items:center; justify-content:center;
-                                    font-family:sans-serif; text-align:center; padding:20px;">
-                            <h1>⛔️ Доступ ограничен</h1>
-                            <p>Эта игра — часть платного курса. <br>
-                            Пожалуйста, вернитесь к обучению на Stepik.</p>
-                            <a href="https://stepik.org" style="color:#4ade80;">Перейти к курсу</a>
-                        </div>`;
-                    window.stop();
-                }
-            } catch(e) { } // Игнорируем ошибки в изолированных iframe
-        })();
     </script>
 
     <!-- UI Overlay -->
@@ -1010,4 +976,5 @@
 
     </script>
 </body>
+
 </html>
